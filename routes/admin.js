@@ -16,8 +16,7 @@ const products = [];
 // /admin/add-product
 router.get("/add-product", (req, res, next) => {
     // By default in express the header is text/html | We can change it using setHeader()
-    res.render("add-product.hbs", {pageTitle: "Add a Product", path: "/admin/add-product",
-    activeShop: false, activeAddProduct: true, productCSS: true, formCSS: true});
+    res.render("add-product.ejs", {pageTitle: "Add a Product", path: "/admin/add-product"})
 });
 
 // Will fire only for post requests (get, patch, put)
