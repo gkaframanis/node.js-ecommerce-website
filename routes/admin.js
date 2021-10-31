@@ -1,30 +1,16 @@
-const path = require('path');
+const path = require("path");
 
-const express = require('express');
+const express = require("express");
 
-const rootDir = require("../utils/path");
-
-
+const productsController = require("../controllers/products");
 // router is like a mini express
 const router = express.Router();
 
-const products = [];
-
 // It will executed for every request | Works for all the http methods.
-// next is a function that has to be executed to allow the request to travel on the next middleware.
-// Path that starts with / when using use. Exact matching for the others!!!
-// /admin/add-product
-router.get("/add-product", (req, res, next) => {
-    // By default in express the header is text/html | We can change it using setHeader()
-    res.render("add-product.ejs", {pageTitle: "Add a Product", path: "/admin/add-product"})
-});
+// We pass a reference to the functions that needs to be executed whenever a request is made to admin/add-product
+router.get("/add-product", productsController.getAddProduct);
 
 // Will fire only for post requests (get, patch, put)
-router.post("/add-product", (req, res, next) => {
-    // Key is the name and the value we get from the form.
-    products.push({title: req.body.title});
-    res.redirect("/");
-});
+router.post("/add-product", productsController.postAddProduct);
 
-exports.routes = router;
-exports.products = products;
+module.exports = router;
